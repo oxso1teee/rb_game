@@ -32,7 +32,16 @@ MapConfig.Stages = {
 	{ Kind = "Moving", Position = Vector3.new(6, 13, 95), Size = Vector3.new(6, 1, 6), Offset = Vector3.new(10, 0, 0), Time = 2 },
 	{ Kind = "Moving", Position = Vector3.new(6, 15, 106), Size = Vector3.new(6, 1, 6), Offset = Vector3.new(0, 6, 0), Time = 1.5 },
 	{ Kind = "Platform", Position = Vector3.new(6, 22, 117), Size = Vector3.new(6, 1, 6) },
-	{ Kind = "Checkpoint", Position = Vector3.new(6, 23, 128), Size = Vector3.new(14, 1, 14), Finish = true },
+	{ Kind = "Checkpoint", Position = Vector3.new(6, 23, 128), Size = Vector3.new(14, 1, 14) },
+
+	{ Kind = "Platform", Position = Vector3.new(0, 24, 141), Size = Vector3.new(4, 1, 4) },
+	{ Kind = "Platform", Position = Vector3.new(-6, 25, 150), Size = Vector3.new(4, 1, 4) },
+	{ Kind = "Moving", Position = Vector3.new(-6, 27, 160), Size = Vector3.new(5, 1, 5), Offset = Vector3.new(12, 0, 0), Time = 2.5 },
+	{ Kind = "Kill", Position = Vector3.new(0, 26, 172), Size = Vector3.new(16, 1, 10) },
+	{ Kind = "Platform", Position = Vector3.new(-4, 29, 168), Size = Vector3.new(3, 1, 3) },
+	{ Kind = "Platform", Position = Vector3.new(4, 29, 176), Size = Vector3.new(3, 1, 3) },
+	{ Kind = "Moving", Position = Vector3.new(0, 31, 186), Size = Vector3.new(5, 1, 5), Offset = Vector3.new(0, 8, 0), Time = 1.8 },
+	{ Kind = "Checkpoint", Position = Vector3.new(0, 33, 198), Size = Vector3.new(14, 1, 14), Finish = true },
 }
 
 MapConfig.Colors = {

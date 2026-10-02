@@ -11,6 +11,9 @@ local map = workspace:WaitForChild("Map")
 local checkpoints = map:WaitForChild("Checkpoints")
 local spawn = map:WaitForChild("Spawn")
 
+-- Время текущей попытки (сбрасывается при каждом спавне/респавне после смерти).
+local runStart = {}
+
 local function getHumanoid(hit)
 	local character = hit:FindFirstAncestorOfClass("Model")
 	return character and character:FindFirstChildOfClass("Humanoid"), character
@@ -41,11 +44,17 @@ local function onPlayerAdded(player)
 	stage.Name = "Stage"
 	stage.Parent = leaderstats
 
+	local bestTime = Instance.new("NumberValue")
+	bestTime.Name = "ЛучшееВремя"
+	bestTime.Value = 0
+	bestTime.Parent = leaderstats
+
 	local function onCharacter(character)
 		local root = character:WaitForChild("HumanoidRootPart")
 		task.defer(function()
 			root.CFrame = respawnPoint(player)
 		end)
+		runStart[player] = os.clock()
 	end
 
 	player.CharacterAdded:Connect(onCharacter)
@@ -58,6 +67,10 @@ Players.PlayerAdded:Connect(onPlayerAdded)
 for _, player in Players:GetPlayers() do
 	onPlayerAdded(player)
 end
+
+Players.PlayerRemoving:Connect(function(player)
+	runStart[player] = nil
+end)
 
 for _, checkpoint in checkpoints:GetChildren() do
 	checkpoint.Touched:Connect(function(hit)
@@ -74,7 +87,13 @@ for _, checkpoint in checkpoints:GetChildren() do
 		if reached > stage.Value then
 			stage.Value = reached
 			if checkpoint:GetAttribute("Finish") then
-				print(player.Name .. " прошёл карту!")
+				local elapsed = runStart[player] and (os.clock() - runStart[player]) or 0
+					elapsed = math.floor(elapsed * 10 + 0.5) / 10
+					local best = player.leaderstats.ЛучшееВремя
+					if best.Value == 0 or elapsed < best.Value then
+						best.Value = elapsed
+					end
+					print(player.Name .. " прошёл карту за " .. elapsed .. " сек")
 			end
 		end
 	end)
