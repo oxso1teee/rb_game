@@ -2,6 +2,13 @@
 
 Obby-карта, описанная кодом. Готовый файл карты: [`rb_game.rbxlx`](rb_game.rbxlx).
 
+![Обзор карты](docs/map_overview.png)
+![Вид сбоку](docs/map_side.png)
+
+Превью отрисованы из `MapConfig.luau` (three.js), а не сняты в Roblox: геометрия и цвета те же,
+графика проще. Зелёный — чекпоинт, жёлтый — платформа, красный — убивает, синий — движется
+(полупрозрачный — где окажется), белый — финиш.
+
 ## Честно про телефон
 
 Roblox Studio — единственный официальный редактор карт — работает только на Windows и macOS.
@@ -21,7 +28,7 @@ Roblox Studio — единственный официальный редакто
 1. Открой `src/shared/MapConfig.luau` — там все платформы, цвета, высоты.
 2. Поменяй числа или добавь строку в `MapConfig.Stages`:
    ```lua
-   { Kind = "Platform", Position = Vector3.new(6, 24, 160), Size = Vector3.new(6, 1, 6) },
+   { Kind = "Platform", Position = Vector3.new(6, 24, 141), Size = Vector3.new(6, 1, 6) },
    ```
    Типы: `Platform`, `Kill` (убивает), `Moving` (двигается, нужны `Offset` и `Time`),
    `Checkpoint` (сохранение; `Finish = true` — финиш).
